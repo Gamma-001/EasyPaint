@@ -32,9 +32,23 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR cmdLi
 		return -1;
 	}
 
+	TabWindow toolTab(hInstance);
+
+	toolTab.Create(L"", WS_CHILD | WS_CLIPSIBLINGS | WS_VISIBLE, NULL, NULL, MainWindow.hWnd, 0, 0, 1280, 150);
+
+	if (toolTab.hWnd == NULL) {
+		OutputDebugString(L"Could not create tool tab");
+		return -1;
+	}
+
+	toolTab.AddTab(L"File");
+	toolTab.AddTab(L"Home");
+
+	SendMessage(toolTab.hWnd, WM_SETFONT, reinterpret_cast <WPARAM> (hfSegoe), TRUE);
+
 	Canvas cv(hInstance, 1280, 720);
 
-	cv.Create(L"", WS_CHILD | WS_VISIBLE, NULL, NULL, MainWindow.hWnd, 0, 0, 1280, 720);
+	cv.Create(L"", WS_CHILD | WS_VISIBLE, NULL, NULL, MainWindow.hWnd, 0, 151, 1280, 720);
 
 	ShowWindow(MainWindow.hWnd, nCmdShow);
 

@@ -218,3 +218,11 @@ D2D1_POINT_2F Canvas::MapCoordinate(D2D1_POINT_2F &pos) {
 
 	return res;
 }
+
+void Canvas::Resize(RECT* rc) {
+	if (rc->right > (rect.right - rect.left)) {
+		windowPos.left = (rc->right - (rect.right - rect.left)) / 2;
+
+		SetWindowPos(hWnd, HWND_NOTOPMOST, windowPos.left, windowPos.top, windowPos.right, windowPos.bottom, SWP_NOZORDER | SWP_NOACTIVATE);
+	}
+}

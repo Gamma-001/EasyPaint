@@ -10,8 +10,7 @@ std::wstring TabWindow::GetTabName(int i) {
 
 // extend or decrease the width of the tab window based on the parent window
 void TabWindow::Resize(RECT* rc) {
-
-	SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, rect.right + rc->right, rect.bottom, SWP_NOZORDER | SWP_NOACTIVATE);
+	SetWindowPos(hWnd, HWND_NOTOPMOST, 0, 0, rc->right, rect.bottom, SWP_NOZORDER | SWP_NOACTIVATE);
 
 	rect.right += rc->right;
 }
@@ -32,4 +31,9 @@ void TabWindow::AddTab(std::wstring str) {
 	tabNames.push_back(str);
 
 	delete[] temp;
+}
+
+// won't be used
+LRESULT TabWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) { 
+	return TRUE;
 }

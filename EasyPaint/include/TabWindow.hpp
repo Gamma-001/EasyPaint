@@ -18,7 +18,7 @@ public:
 	}
 
 	// would not be used because this is a control class
-	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) { }
+	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 	/*
 	* @brief Returs the inner text of a tab at the given index

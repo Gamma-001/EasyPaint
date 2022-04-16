@@ -1,4 +1,5 @@
 #include "OverlappedWindow.hpp"
+#include "TabWindow.hpp"
 
 LRESULT OverlappedWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 	switch (uMsg) {
@@ -26,9 +27,7 @@ LRESULT OverlappedWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		RECT rc;
 		GetClientRect(hWnd, &rc);
 
-		RECT diff = { 0, 0, rc.right - rect.right, rc.bottom - rect.bottom };
-
-		EnumChildWindows(hWnd, EnumChildProc, reinterpret_cast <LPARAM> (&diff));
+		EnumChildWindows(hWnd, EnumChildProc, reinterpret_cast <LPARAM> (&rc));
 
 		rect.right = rc.right;
 		rect.bottom = rc.bottom;
@@ -52,12 +51,23 @@ LRESULT OverlappedWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	// LPARAM : DRAWITEMSTRUCT structure
 	case WM_DRAWITEM:
 	{
-		DRAWITEMSTRUCT* pDis = reinterpret_cast <DRAWITEMSTRUCT*> (lParam);
-		std::wstring str = std::to_wstring(pDis->itemID) + L"\n";
+		//DRAWITEMSTRUCT* pDis = reinterpret_cast <DRAWITEMSTRUCT*> (lParam);
+		//
+		//// itemID will store the index of the tab item
+		//int id = pDis->itemID;
 
-		OutputDebugString(str.c_str());
+		//TabWindow* tab = reinterpret_cast <TabWindow*> (GetWindowLongPtr(pDis->hwndItem, GWLP_USERDATA));
+
+		//OutputDebugString(tab->GetTabName(id).c_str());
+
+		//PAINTSTRUCT ps;
+		//BeginPaint(pDis->hwndItem, &ps);
+
+		//FillRect(pDis->hDC, &pDis->rcItem, CreateSolidBrush(RGB(10, 10, 10)));
+
+		//EndPaint(pDis->hwndItem, &ps);
 	}
-	break;
+	return TRUE;
 
 	// Sent by common control
 	// WPARAM : identifier fo the common control sending the message

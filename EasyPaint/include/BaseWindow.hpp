@@ -22,6 +22,7 @@ public:
 	HWND hWnd;
 	HINSTANCE hInstance;
 	RECT rect;
+	RECT windowPos;
 
 	D2D1_COLOR_F bgColor;
 
@@ -62,6 +63,7 @@ public:
 
 		if (hWnd) {
 			GetClientRect(hWnd, &rect);
+			windowPos = { x, y, width, height };
 		}
 
 		return hWnd != NULL;

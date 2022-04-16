@@ -80,4 +80,6 @@ public:
 	virtual ~Canvas() {
 		DiscardGraphicsResources();
 	}
+
+	void Resize(RECT* rc);
 };
